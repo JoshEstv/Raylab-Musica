@@ -1,0 +1,36 @@
+#include "raylib.h"
+
+int main() {
+    // Inicializa a janela
+    InitWindow(800, 600, "Tocando Música com Raylib");
+
+    // Inicializa o dispositivo de áudio
+    InitAudioDevice();
+
+    // Carrega a música
+    Music music = LoadMusicStream("musica.mp3"); // Use o caminho absoluto se necessário
+
+    // Toca a música
+    PlayMusicStream(music);
+
+    // Loop principal
+    while (!WindowShouldClose()) {
+        // Atualiza a música
+        UpdateMusicStream(music);
+
+        // Inicia o desenho
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawText("Tocando música...", 190, 200, 20, LIGHTGRAY);
+        EndDrawing();
+    }
+
+    // Descarrega a música e fecha o dispositivo de áudio
+    UnloadMusicStream(music);
+    CloseAudioDevice();
+
+    // Fecha a janela
+    CloseWindow();
+
+    return 0;
+}
